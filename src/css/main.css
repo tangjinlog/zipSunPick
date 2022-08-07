@@ -65,11 +65,22 @@ a {
 .fs-200 { font-size: var(--fs-200); }
 
 
+/* Animation */
+@keyframes pickAni {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: -300%;
+  }
+}
+
+
 
 /*--------------------*/
 /*      component     */
 /*--------------------*/
-
 
 nav {
   width: 100%;
@@ -178,10 +189,30 @@ nav {
 }
 
 /* onepick page */
+.pick-1-con {
+  position: relative;
+  width: 15vw;
+  height: 10vh;
+  overflow: hidden;
+  outline: 2px solid limegreen;
+}
+
+
 .pick-1-box {
-  display: inline-block;
-  padding: 10px;
-  border: 2px solid limegreen;
+  position: absolute;
+  width: 100%;
+  /* height: 100%; */
+  /* top: -100%; */
+  top: -300%;
+  left: 0;
+  line-height: 1.5;
+  /* animation: pickAni .4s infinite linear; */
+  /* border: 2px solid limegreen; */
+}
+
+.pick-1-box span {
+  height: 10vh;
+  /* padding: 0.25rem; */
 }
 
 
