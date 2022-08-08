@@ -237,9 +237,104 @@ nav {
   animation: pickConMove 0.8s ease-in-out 5.9s 1 forwards;
 }
 
+/* recommend-list */
+.rec-section {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.arrow-left,
+.arrow-right {
+  position: absolute;
+  display: inline-block;
+  top: 30%;
+  z-index: 5;
+}
+
+.arrow-left {
+  left: 10px;
+}
+
+.arrow-right {
+  right: 10px;
+}
+
+.item-con {
+  position: relative;
+  width: 90%;
+  height: 75%;
+  margin-top: 1rem;
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
 
 
-@media (min-width: 748px) {
+.item-list-con {
+  position: absolute;
+  width: 133.333%;
+  height: 100%;
+  padding: 1rem 0;
+  outline: 1px solid limegreen;
+}
+
+.item-box {
+  height: 100%;
+}
+
+.item-list {
+  width: 30%;
+  height: 100%;
+  padding: 1rem;
+  text-align: center;
+  border-right: 1px solid #ddd;
+}
+
+.item { /* img + item-name + price */
+  position: relative;
+  width: 100%;
+  height: 90%;
+}
+
+.item-img img {
+  z-index: 5;
+  width: 100%;
+  height: 50%;
+}
+
+.item-name {
+  padding-top: 1rem;
+}
+
+.item-price {
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  bottom: 7%;
+}
+
+.select-btn {
+  padding-bottom: 1rem;
+}
+
+.select-btn button{
+  display: inline-block;
+  width: 10vh;
+  height: 5vh;
+  border: 2px solid rgba(129, 91, 3, 0.81);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.select-btn button:hover {
+  background: rgba(129, 91, 3, 0.41);
+}
+
+
+@media (min-width: 45em) {
   .img-con {
     width: 20vw;
     height: 20vw;
