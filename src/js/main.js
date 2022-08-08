@@ -17,9 +17,14 @@
   }
 
   /* Pick Animation */
-  const pickCon = document.querySelector('.pick-1-con');
-  const pickBox = document.querySelector('.pick-1-box');
-  pickBox.innerHTML = ''
+  const pickCon1 = document.querySelector('.pick-1-con');
+  const pickCon2 = document.querySelector('.pick-2-con');
+  const pickCon3 = document.querySelector('.pick-3-con');
+
+  let pickTiming = { duration: 200, iterations: 1, fill: 'forwards' };
+
+  const pickBox1 = document.querySelector('.pick-1-box');
+  pickBox1.innerHTML = ''
   + '<span>에어프라이어</span>'
   + '<span>김치냉장고</span>'
   + '<span>LG스마트TV</span>'
@@ -41,12 +46,16 @@
   + '<span>삼성비스포크</span>'
   + '<span>휴지</span>';
 
-  pickCon.addEventListener('animationend', () => {
+  pickCon1.addEventListener('animationend', () => {
     const pickScale = [ {transform: 'scale(1)'}, {transform: 'scale(1.2)'} ];
-    const pickTiming = { duration: 200, iterations: 1, fill: 'forwards' };
-    pickCon.animate(pickScale, pickTiming);
-    
+    pickCon1.animate(pickScale, pickTiming);
   })
+
+  // pickCon2.addEventListener('animationstart', () => {
+  //   const pickConMove = [ {transform: 'translateY(0)'}, {transform: 'translateY(1vh)'} ];
+  //   pickCon2.animate(pickConMove, pickTiming);
+  // })
+  
 
 
 
