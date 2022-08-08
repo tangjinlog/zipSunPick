@@ -35,14 +35,62 @@
     pickCon1.animate(pickScale, pickTiming);
   })
 
-  // pickCon2.addEventListener('animationstart', () => {
-  //   const pickConMove = [ {transform: 'translateY(0)'}, {transform: 'translateY(1vh)'} ];
-  //   pickCon2.animate(pickConMove, pickTiming);
-  // })
-  
+  function itemArrow() {
+    const itemListCon = document.querySelector('.item-list-con');
+    const leftArrow = document.querySelector('.arrow-left');
+    const rightArrow = document.querySelector('.arrow-right');
+    let itemList = document.getElementsByClassName('item-list');
+    let index = 0;
+
+    leftArrow.addEventListener('click', () => {
+      if( index == 0 ) {
+        index = itemList.length - 3; // 1
+      } else {
+        index--;
+      } 
+      itemListCon.style.marginLeft = '-' + index * 33.33 + '%';
+    })
+
+    rightArrow.addEventListener('click', () => {
+      if( index == itemList.length - 3 ) {
+        index = -(itemList.length - 3); // -1
+      } else {
+        index++;
+      } 
+      console.log(index)
+      itemListCon.style.marginLeft =  '-'+ index * 33.33 + '%';
+    })
 
 
+    // if( child ) {
+    //   leftArrow.addEventListener('click', () => {
+    //     if( listMargin ) {
+    //       (listMargin += 33.33) + '%';
+    //     } else {
+    //       console.log(listMargin);
+    //       listMargin = -33.33 + '%';
+    //     }
+    //   })
 
+    //   rightArrow.addEventListener('click', () => {
+    //     if( listMargin != 0) {
+    //       listMargin += -(marginValue);
+    //     } else {
+    //       listMargin = (child - 3) * -(marginValue);
+    //     }
+    //   })
+
+
+    // }
+
+    
+
+    // rightArrow.addEventListener('click', () => {
+    //   marginValue += '-33.33' + '%';
+    //   itemListCon.style.marginLeft = marginValue;
+    // })
+  }
+  itemArrow();
   // const slowAni = [ {top: `-400%`} , {top: 0} ];
   // const slowAni2 = [ {top: `-400%`} , {top: 0} ];
   // const slowTiming = {
@@ -68,3 +116,18 @@
 
 
 })();
+
+
+/* 구현예정 */
+/* 
+item-list-con 의 width 값
+width : 100% + (100% / item 개수)%
+마지막 아이템에서 오른쪽화살표 클릭시 맨 처음 아이템으로 이동
+반대도 마찬가지
+
+js - mediaquery
+
+
+알아낸 사실 셀렉터 포함 숫자 끼리만 - 계산 적용,
+변수포함한 숫자는 - 계산 안됨 문자열로만 붙여짐
+*/

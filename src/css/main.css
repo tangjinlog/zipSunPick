@@ -277,6 +277,7 @@ nav {
   width: 133.333%;
   height: 100%;
   padding: 1rem 0;
+  transition: 0.5s;
   outline: 1px solid limegreen;
 }
 
