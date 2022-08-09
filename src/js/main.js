@@ -53,14 +53,12 @@
 
     rightArrow.addEventListener('click', () => {
       if( index == itemList.length - 3 ) {
-        index = -(itemList.length - 3); // -1
+        index = 0; 
       } else {
         index++;
       } 
-      console.log(index)
       itemListCon.style.marginLeft =  '-'+ index * 33.33 + '%';
     })
-
 
     // if( child ) {
     //   leftArrow.addEventListener('click', () => {
