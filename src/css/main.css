@@ -51,6 +51,10 @@ a {
   align-items: center;
 }
 
+.grid {
+  display: grid;
+}
+
 /* font */
 .uppercase { text-transform: uppercase; }
 
@@ -125,7 +129,7 @@ nav {
 .bg-section {
   position: relative;
   width: 100%;
-  height: 50vh;
+  height: 45vh;
   background: rgba(129, 91, 3, 0.81);
 }
 
@@ -225,8 +229,8 @@ nav {
 .pick-3-con {
   width: 25vh;
   height: 5vh;
-  opacity: 0;
-  /* outline: 2px solid limegreen; */
+  /* opacity: 0; */
+  outline: 2px solid limegreen;
 }
 
 .pick-2-con {
@@ -245,11 +249,17 @@ nav {
   background: rgba(255, 255, 255, 0.7);
 }
 
+.h2-logo {
+  height: 4rem;
+  line-height: 4rem;
+  padding: 0 1rem;
+}
+
 .arrow-left,
 .arrow-right {
   position: absolute;
   display: inline-block;
-  top: 30%;
+  top: 45%;
   z-index: 5;
 }
 
@@ -265,7 +275,6 @@ nav {
   position: relative;
   width: 90%;
   height: 75%;
-  margin-top: 1rem;
   margin-inline: auto;
   overflow: hidden;
   border: 1px solid #ddd;
@@ -332,6 +341,74 @@ nav {
 
 .select-btn button:hover {
   background: rgba(129, 91, 3, 0.41);
+}
+
+/* list-section */
+.list-section {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  outline: 2px solid limegreen;
+  background: rgba(129, 91, 3, 0.41);
+}
+
+.grid-container {
+  height: 100%;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: repeat(2, 50%);
+  /* outline: 3px solid red; */
+}
+
+.added-list {
+  position: relative;
+  height: calc(100% - 4rem);
+  outline: 3px solid red;
+}
+
+.added-item-con {
+  padding: 1rem;
+  height: 90%;
+  outline: 2px solid dodgerblue;
+}
+
+.added-item {
+  position: relative;
+  width: 90%;
+  height: 90%;
+  margin: 0.5rem auto;
+  border: 2px solid black;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.added-item.a {
+  background-image: url(/src/images/airfryer.png);
+  background-position: center;
+  background-repeat: none;
+  background-size: cover;
+}
+
+.added-item a {
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  color: white;
+}
+
+.added-item .bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0,0.3)
+}
+
+.added-list-msg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2rem;
+  font-size: 1.25rem;
+  outline: 2px solid orange;
 }
 
 
