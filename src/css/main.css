@@ -86,11 +86,11 @@ a {
 
 @keyframes pickConMove {
   0% {
-    transform: translateY(0);
+    transform: translateY(4vh);
     opacity: 0;
   }
   100% {
-    transform: translateY(-4vh);
+    transform: translateY(0);
     opacity: 1;
   }
 }
@@ -210,6 +210,8 @@ nav {
 .pick-1-con {
   position: relative;
   width: 35vh;
+  height: 10vh;
+  margin-bottom: 2rem;
   overflow: hidden;
   outline: 2px solid var(--clr-black);
   background: rgba(255, 255, 255, 0.8);
@@ -228,8 +230,9 @@ nav {
 
 .pick-2-con,
 .pick-3-con {
-  width: 25vh;
+  width: 30vh;
   height: 5vh;
+  margin-bottom: 1rem;
   opacity: 0;
   /* outline: 2px solid limegreen; */
 }
