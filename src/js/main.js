@@ -2,8 +2,6 @@
 
   /* Pick Animation */
   const pickCon1 = document.querySelector('.pick-1-con');
-  const pickCon2 = document.querySelector('.pick-2-con');
-  const pickCon3 = document.querySelector('.pick-3-con');
 
   let pickTiming = { duration: 200, iterations: 1, fill: 'forwards' };
 
@@ -59,60 +57,8 @@
       } 
       itemListCon.style.marginLeft =  '-'+ index * 33.33 + '%';
     })
-
-    // if( child ) {
-    //   leftArrow.addEventListener('click', () => {
-    //     if( listMargin ) {
-    //       (listMargin += 33.33) + '%';
-    //     } else {
-    //       console.log(listMargin);
-    //       listMargin = -33.33 + '%';
-    //     }
-    //   })
-
-    //   rightArrow.addEventListener('click', () => {
-    //     if( listMargin != 0) {
-    //       listMargin += -(marginValue);
-    //     } else {
-    //       listMargin = (child - 3) * -(marginValue);
-    //     }
-    //   })
-
-
-    // }
-
-    
-
-    // rightArrow.addEventListener('click', () => {
-    //   marginValue += '-33.33' + '%';
-    //   itemListCon.style.marginLeft = marginValue;
-    // })
   }
   itemArrow();
-  // const slowAni = [ {top: `-400%`} , {top: 0} ];
-  // const slowAni2 = [ {top: `-400%`} , {top: 0} ];
-  // const slowTiming = {
-  //   duration: 600,
-  //   iterations: 5,
-  //   // easing: 'linear',
-  //   fill: 'forwards',
-  // }
-  // const slowTiming2 = {
-  //   duration: 1500,
-  //   iterations: 2,
-  //   delay: 500,
-  //   // easing: 'eas',
-  //   fill: 'forwards',
-  // }
-  // // pickBox.addEventListener('animationend', () => {
-  // //   // pickBox.animate(slowAni, slowTiming);
-  // //   pickBox.animate(slowAni2, slowTiming2);
-
-  // // })
-
-
-
-
 })();
 
 
