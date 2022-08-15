@@ -43,3 +43,24 @@ const io = require('socket.io')
       origin: '*',
     }
 });
+
+io.on('connection', (socket) => {
+  console.log('socket connected');
+
+  /* 연결 끊길 시 */
+  socket.on('disconnect', () => {
+    console.log('socket disconnected');
+  })
+
+  /* JOIN, SEND, UPDATE */
+  socket.on('JOIN_ROOM', ({roomId, userId}) => {
+    console.log({roomId, userId});
+    socket.join(roomId);
+  })
+
+  socket.on('SEND_MESSAGE', ({roomId, userId, message}) => {
+    console.log({roomId, userId, message});
+    io.to(roomId).emit('UPDATE_MESSAGE', {userId, message});
+  })
+
+});
