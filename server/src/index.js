@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const config = require('config');
 const cors = require('cors');
-// const { db } = require('./config/default');
+const Schema = require('./models/sample'); 
 
 const port = config.get('port');
 const app = express();
@@ -13,10 +13,19 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors({origin: "*"}));
+
+app.get('/', function(req, res) {
+  res.redirect('/index');
+})
+//정적파일 참조를 위한 static 미들웨어함수
+app.use(express.static(path.join(__dirname, '../../client/src')));
+
 //라우팅시
-app.get('/', (req, res, next) => {
-  res.send('tangjinlog');
+app.get('/index', (req, res, next) => {
+  res.sendFile(path.join(__dirname, '../../client/src', 'index.html'));
 });
+
+
 //express 사용 포트를받아서 서버 염
 const server = app.listen(port, () => {
   console.log(`Server is listening on port ${port}`)
@@ -61,6 +70,10 @@ io.on('connection', (socket) => {
   socket.on('SEND_MESSAGE', ({roomId, userId, message}) => {
     console.log({roomId, userId, message});
     io.to(roomId).emit('UPDATE_MESSAGE', {userId, message});
+    const chatSchema = new Schema({ userId: userId, text: message });
+    chatSchema.save(function (err, {userId, message}) {
+      console.log('message is inserted');
+    })
   })
 
 });
