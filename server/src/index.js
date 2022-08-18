@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(cors({origin: "*"}));
 //라우팅시
 app.get('/', (req, res, next) => {
-  res.send('tangjinlog');
+  res.send('/clinet/src/index.html');
 });
 //express 사용 포트를받아서 서버 염
 const server = app.listen(port, () => {
