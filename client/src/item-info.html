@@ -10,7 +10,7 @@
   <script src="https://kit.fontawesome.com/e5f1986942.js" crossorigin="anonymous"></script>
   <!-- <script src="/src/js/main.js" defer></script> -->
   <script src="/js/sns-share.js" defer></script>
-  <script src="/js/item-info.js" defer></script>
+  <script src="/js/item-info.js" type="module" defer></script>
   <script src="/socket.io/socket.io.js"></script>
   <title>집선픽</title>
 </head>
@@ -111,11 +111,11 @@
             </div>
 
 
-            <form class="chat-form flex-r">
-              <input type="text" id="message" size="30" autocomplete="off" maxlength="80">
-              <input type="submit" id="chat-btn" value="등록">
-            </form>
           </div>
+          <form class="chat-form flex-r">
+            <input type="text" id="message" size="30" autocomplete="off" maxlength="80" value="">
+            <input type="submit" id="chat-btn" value="등록">
+          </form>
         </div>
       </section>
     </article>
