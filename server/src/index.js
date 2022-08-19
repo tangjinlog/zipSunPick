@@ -3,10 +3,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const config = require('config');
 const cors = require('cors');
-const Schema = require('./models/sample'); 
 
 const port = config.get('port');
 const app = express();
+const Chat = require('./models/sample/schema');
 
 /* 미들웨어 함수 사용시 (폴더생성해야함) */
 // const logger = require('./middlewares');
@@ -55,6 +55,8 @@ const io = require('socket.io')
 
 io.on('connection', (socket) => {
   console.log('socket connected');
+  
+  console.log(Chat);
 
   /* 연결 끊길 시 */
   socket.on('disconnect', () => {
@@ -67,13 +69,32 @@ io.on('connection', (socket) => {
     socket.join(roomId);
   })
 
-  socket.on('SEND_MESSAGE', ({roomId, userId, message}) => {
-    console.log({roomId, userId, message});
-    io.to(roomId).emit('UPDATE_MESSAGE', {userId, message});
-    const chatSchema = new Schema({ userId: userId, text: message });
-    chatSchema.save(function (err, {userId, message}) {
+  // Chat.find( (err, result) => {
+  //   if(err) {
+  //     console.log('error');
+  //   }
+  //   for(var i = 0; i < result.length; i++) {
+  //     const dbData = { message: result[i].text};
+  //     io.socket[socket.id].emit('preload', dbData);
+  //   }
+  // })
+
+
+  socket.on('SEND_MESSAGE', function(data) {
+    io.emit('SEND_MESSAGE', data);
+    
+  
+    let chat = new Chat({text: data.message});
+    chat.save(function (err, data) {
+      if(err) {
+        console.log('error');
+      }
       console.log('message is inserted');
-    })
+    });
+  
+
+
+    // const chat = new ChatSchema({ userId: undefined, text: data.message });
   })
 
 });
