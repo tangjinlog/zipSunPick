@@ -55,8 +55,8 @@ const io = require('socket.io')
 
 io.on('connection', (socket) => {
   console.log('socket connected');
+  // console.log(socket.id);
   
-  console.log(Chat);
 
   /* 연결 끊길 시 */
   socket.on('disconnect', () => {
@@ -69,22 +69,21 @@ io.on('connection', (socket) => {
     socket.join(roomId);
   })
 
-  // Chat.find( (err, result) => {
-  //   if(err) {
-  //     console.log('error');
-  //   }
-  //   for(var i = 0; i < result.length; i++) {
-  //     const dbData = { message: result[i].text};
-  //     io.socket[socket.id].emit('preload', dbData);
-  //   }
-  // })
+  Chat.find( {}, (err, result) => {
+    if(err) {
+      console.log('error');
+    }
+    for(var i = 0; i < result.length; i++) {
+      const dbData = { message: result[i].text};
+      io.emit('preload', dbData);
+    }
+  })
 
 
   socket.on('SEND_MESSAGE', function(data) {
     io.emit('SEND_MESSAGE', data);
-    
   
-    let chat = new Chat({text: data.message});
+    let chat = new Chat({socketId: socket.id, text: data.message});
     chat.save(function (err, data) {
       if(err) {
         console.log('error');
