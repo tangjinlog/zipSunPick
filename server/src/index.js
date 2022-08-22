@@ -83,7 +83,7 @@ io.on('connection', (socket) => {
   socket.on('SEND_MESSAGE', function(data) {
     io.emit('SEND_MESSAGE', data);
   
-    let chat = new Chat({socketId: socket.id, text: data.message});
+    let chat = new Chat({userId: socket.id, text: data.message});
     chat.save(function (err, data) {
       if(err) {
         console.log('error');
