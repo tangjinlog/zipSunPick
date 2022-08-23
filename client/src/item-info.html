@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/css/default.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
   <script src="https://kit.fontawesome.com/e5f1986942.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <!-- <script src="/src/js/main.js" defer></script> -->
   <script src="/js/sns-share.js" defer></script>
   <script src="/js/item-info.js" type="module" defer></script>
@@ -97,6 +98,10 @@
                 <p class="msg-content">내용</p>
                 <button class="reply-btn" value="답글쓰기">답글쓰기</button>
                 <!-- 답글쓰기 -->
+                <form class="reply-form flex-r">
+                  <input type="text" id="reply-msg" size="30" autocomplete="off" maxlength="80">
+                  <input type="submit" id="reply-form-btn" value="등록">
+                </form>
                 <!-- <div class="reply msg-con flex-r">
                   <div class="msg-img-box">
                     <span class="user-img"></span>  
@@ -113,7 +118,7 @@
 
           </div>
           <form class="chat-form flex-r">
-            <input type="text" id="message" size="30" autocomplete="off" maxlength="80" value="">
+            <input type="text" id="message" size="30" autocomplete="off" maxlength="80">
             <input type="submit" id="chat-btn" value="등록">
           </form>
         </div>
