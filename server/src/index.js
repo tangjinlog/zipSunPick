@@ -74,7 +74,7 @@ io.on('connection', (socket) => {
       console.log('error');
     }
     for(var i = 0; i < result.length; i++) {
-      const dbData = { message: result[i].text, comment: result[i].comment};
+      const dbData = { message: result[i].text, comment: result[i].comment, id: result[i]._id};
       io.emit('preload', dbData);
     }
   })
