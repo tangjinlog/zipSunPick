@@ -94,12 +94,13 @@ io.on('connection', (socket) => {
   })
 
   socket.on('SEND_REPLY', function(data) {
-    // io.emit('SEND_REPLY');
+    io.emit('SEND_REPLY', data);
 
     let chat = new Chat({ 
       comment: {
         comment_author: data.comment_author,
         comment_text: data.comment_text,
+        
       }
     })
     chat.save(function (err, data) {
