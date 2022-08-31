@@ -53,8 +53,6 @@ export default function message() {
         const replyForm = document.createElement('form');
         const replyMsg = document.createElement('input');
         const replyFormBtn = document.createElement('input');
-        
-  
     
         replyForm.setAttribute('class', 'reply-form flex-r');
         replyMsg.setAttribute('id', 'reply-msg');
@@ -67,9 +65,6 @@ export default function message() {
         
         replyFormBtn.addEventListener('click', (e) => {
           e.preventDefault();
-          
-          replyForm.style.display = 'none';
-          console.log(replyBtn)
           chatLog.setAttribute('aria-expanded', false);
           
           const replyCon = document.createElement('div');
@@ -82,7 +77,7 @@ export default function message() {
           
           //클릭이 일어난 부모 node 찾기
           const msgContentBox = e.currentTarget.parentNode.parentNode;
-  
+          
           replyCon.setAttribute('class', 'reply msg-con flex-r');
           replyImgBox.setAttribute('class', 'msg-img-box');
           replyUserImg.setAttribute('class', 'user-img');
@@ -93,6 +88,7 @@ export default function message() {
           
           replyContent.innerText = data.comment_text
           
+          replyForm.remove();
           msgContentBox.append(replyCon);
           replyCon.append(replyImgBox, replyContentBox);
           replyImgBox.append(replyUserImg);
