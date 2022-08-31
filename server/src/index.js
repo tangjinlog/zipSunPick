@@ -74,7 +74,7 @@ io.on('connection', (socket) => {
       console.log('error');
     }
     for(var i = 0; i < result.length; i++) {
-      const dbData = { message: result[i].text};
+      const dbData = { message: result[i].text, comment: result[i].comment, id: result[i]._id};
       io.emit('preload', dbData);
     }
   })
@@ -83,17 +83,32 @@ io.on('connection', (socket) => {
   socket.on('SEND_MESSAGE', function(data) {
     io.emit('SEND_MESSAGE', data);
   
-    let chat = new Chat({socketId: socket.id, text: data.message});
+    let chat = new Chat({userId: socket.id, text: data.message});
     chat.save(function (err, data) {
       if(err) {
         console.log('error');
       }
       console.log('message is inserted');
     });
-  
-
-
     // const chat = new ChatSchema({ userId: undefined, text: data.message });
+  })
+
+  socket.on('SEND_REPLY', function(data) {
+    io.emit('SEND_REPLY', data);
+
+    let chat = new Chat({ 
+      comment: {
+        comment_author: data.comment_author,
+        comment_text: data.comment_text,
+        
+      }
+    })
+    chat.save(function (err, data) {
+      if(err) {
+        console.log('error');
+      }
+      console.log('message is inserted');
+    })
   })
 
 });
