@@ -81,8 +81,8 @@ io.on('connection', (socket) => {
 
 
   socket.on('SEND_MESSAGE', function(data) {
-    io.emit('SEND_MESSAGE', data);
-  
+    
+    
     let chat = new Chat({userId: socket.id, text: data.message});
     chat.save(function (err, data) {
       if(err) {
@@ -90,25 +90,45 @@ io.on('connection', (socket) => {
       }
       console.log('message is inserted');
     });
+    const id = chat._id;
+    console.log(id)
+    io.emit('SEND_MESSAGE', data, id);
     // const chat = new ChatSchema({ userId: undefined, text: data.message });
   })
 
   socket.on('SEND_REPLY', function(data) {
     io.emit('SEND_REPLY', data);
 
-    let chat = new Chat({ 
-      comment: {
-        comment_author: data.comment_author,
-        comment_text: data.comment_text,
-        
-      }
-    })
-    chat.save(function (err, data) {
+      // const id = ;
+    // const id = data._id;
+    // console.log(id);
+    // Chat.findOneAndUpdate({id}, {comment: {comment_author: data.comment_author}}, {new: true, upsert: true});
+    // Chat.findOneAndUpdate({id}, {comment: {comment_text: data.comment_text}}, {new: true, upsert: true});
+    let chat = new Chat();
+    chat.comment.push({comment_author: data.comment_author});
+    chat.save(function(err, data) {
       if(err) {
         console.log('error');
+      }else {
+        console.log('success')
       }
-      console.log('message is inserted');
     })
+    // Chat.findOneAndUpdate(data.parent_id, {[0]: {comment: {comment_author: data.comment_author}}}, {new: true});
+    // Chat.findOneAndUpdate(data.parent_id, {[0]: {comment: {comment_text: data.comment_text}}}, {new: true});
+
+    // let chat = new Chat({ 
+    //   comment: [{
+    //     comment_author: data.comment_author,
+    //     comment_text: data.comment_text,
+        
+    //   }]
+    // })
+    // chat.save(function (err, data) {
+    //   if(err) {
+    //     console.log('error');
+    //   }
+    //   console.log('message is inserted');
+    // })
   })
 
 });
