@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const config = require('config');
 const cors = require('cors');
 
@@ -9,9 +10,15 @@ const app = express();
 const Chat = require('./models/sample/schema');
 const User = require('./models/sample/user');
 
+
+
+/* jwt */
+const jwt = require('jsonwebtoken');
 /* importing .env file */
-require('dotenv').config();
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env')});
+console.log(process.env.SECRET_KEY)
 /* ejs 파일 사용 */
+app.set('views', path.join(__dirname, '../../client/src/views'));
 app.set('view engine', 'ejs');
 /* bcrypt */
 const bcrypt = require('bcrypt');
@@ -19,6 +26,7 @@ const saltRounds = 10;
 
 /* 미들웨어 함수 사용시 (폴더생성해야함) */
 // const logger = require('./middlewares');
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors({origin: "*"}));
@@ -26,11 +34,16 @@ app.use(cors({origin: "*"}));
 app.get('/', function(req, res) {
   res.redirect('/login');
 })
+
 //정적파일 참조를 위한 static 미들웨어함수
 app.use(express.static(path.join(__dirname, '../../client/src')));
 
+
+/* jwt auth 함수 */
+const { auth } = require('./middlewares/auth');
+
 //라우팅시
-app.get('/login', /*auth,*/ function(req, res) {
+app.get('/login', auth, function(req, res) {
   const user = req.decoded;
   //user가 있고, 로그인 한 경우에 유저정보를 웹페이지와 함께 보낸다.
   if(user) {
@@ -41,11 +54,14 @@ app.get('/login', /*auth,*/ function(req, res) {
   }
 })
 
-//회원가입
+app.get('/logOut', function(req, res) {
+  return res.clearCookie('user').end();
+})
+
+//Sign Up
+// id 중복검사
 app.post('/login/:signUpId/:signUpPw/:signUpPwc', function(req, res, next) {
-  console.log('req.body: ',req.body);
   let user = new User(req.body);
-  console.log(user.pw, user.pwc)
   //pw pwc 비교후 아니면 종료
   if(user.pw !== user.pwc) {
     return res.send('Your password and password confirmation have to be same');
@@ -75,6 +91,7 @@ app.post('/login/:signUpId/:signUpPw/:signUpPwc', function(req, res, next) {
 })
 
 /* bcrypt & salt */
+/* id 중복검사 후 암호화 저장 */
 app.post('/login/:signUpId/:signUpPw/:signUpPwc', function(req, res) {
   //user 정보 다시 넣기
   let user = new User(req.body);
@@ -94,11 +111,49 @@ app.post('/login/:signUpId/:signUpPw/:signUpPwc', function(req, res) {
   })
 })
 
+/* Sign In */
+/* 암호화된 비밀번호와 입력받은 비밀번호랑 비교 */
+app.post('/login/:signInId/:signInPw', function(req, res, next) {
+  //user 변수 초기화
+  let user = new User(req.body);
+  User.findOne({id:user.id}, function(err, docs) {
+    if(err) throw err;
+    else if(docs == null) {
+      return res.send('Entered ID does not exist.');
+    }
+    else { //id 매칭 성공하면
+      bcrypt.compare(user.pw, docs.pw, function(err, answer) {
+        if(err) throw err;
+        else if(answer) {
+          console.log(answer, req.user, docs)
+          req.user = docs;
+          return next();
+        } else {
+          return res.send('Your password does not match with your ID');
+        }
+      })
+    } 
+  })
+})
 
+/* 비밀번호 일치 확인 후 jwt 발급 */
+app.post('/login/:signInId/:signInPw', function(req, res) {
+  const docs = req.user;
+  const payload = {
+    docs,
+  }
+  //jwt 생성
+  jwt.sign( payload, process.env.SECRET_KEY, { expiresIn: "30m" }, function(err, token) {
+    if(err) throw err;
+    else {
+      return res
+        .cookie('user', token, {maxAge: 30 * 60 * 1000})
+        .end();
+    }
+  
+  })
+})
 
-// app.get('/index', (req, res, next) => {
-//   res.sendFile(path.join(__dirname, '../../client/src', 'index.html'));
-// });
 
 
 //express 사용 포트를받아서 서버 염
