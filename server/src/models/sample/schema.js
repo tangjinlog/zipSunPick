@@ -9,13 +9,15 @@ const ChatSchema = new Schema({
   },
   createdAt: { type: Date, default: Date.now, immutable: true },
   comment: [
+    new Schema(
     {
       tpye: String,
       comment_id: ObjectId,
       comment_author: String,
       comment_text: String,
       comment_createdAt: { type: Date, default: Date.now, immutable: true },
-    }
+    },
+    {_id: false})
   ]
 },
 { versionKey: false })
