@@ -124,7 +124,7 @@ app.post('/login/:signInId/:signInPw', function(req, res, next) {
     else { //id 매칭 성공하면
       bcrypt.compare(user.pw, docs.pw, function(err, answer) {
         if(err) throw err;
-        else if(answer) {
+        if(answer) {
           console.log(answer, req.user, docs)
           req.user = docs;
           return next();
