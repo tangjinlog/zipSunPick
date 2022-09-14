@@ -6,7 +6,9 @@ export default function message() {
   const chatBtn = document.getElementById('chat-btn');
   const message = document.getElementById('message');
 
-  function createElem(data) {
+  function createElem(data,id) {
+    
+
     const msgCon = document.createElement('div');
     const msgImgBox = document.createElement('div')
     const userImg = document.createElement('span')
@@ -98,7 +100,8 @@ export default function message() {
             // userId: //mongodb에서 받아올 userid,
             // userImg
             // userLocation
-            comment_author: 'tangjin', 
+            parent_id: id,
+            comment_author: 'reply', 
             comment_text: replyMsg.value,
           })
         })
@@ -111,30 +114,21 @@ export default function message() {
    * 각각의 _id값이 있다. data.save 시.
    * 
    */
-  function createReply(data,e) {
-    
-  }
 
   /* preload */
   socket.on('preload', (data) => {
     createElem(data);
-    if(data.comment_text) {
-      createReply(data);
-    }
   })
 
-  socket.on('SEND_MESSAGE', (data) => {
-    createElem(data);
+  socket.on('SEND_MESSAGE', (data, id) => {
+    createElem(data, id);
     // reply();
   })
 
-  socket.on('SEND_REPLY', (data) => {
-    // createElem(data);
+  // socket.on('SEND_REPLY', (data) => {
+  //   // createElem(data);
     
-    createReply(data);
-
-    
-  })
+  // })
 
 
   chatBtn.addEventListener('click', (e) => {

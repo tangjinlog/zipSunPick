@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/default.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/sns-share.js" defer></script>
+  <title>집선픽</title>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <nav>
+        <div class="primary-header">
+          <a href="#" class="main-title">집선픽</a>
+          <a href="#" id="sign-out-btn">로그아웃</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="bg-section">
+      <div class="profile-con flex-c">
+        <div class="img-con">
+          <div class="img"></div>
+        </div>
+        <div>
+          <p class="profile-name"><%= user.id %></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="btn-section">
+      <div class="btn-con flex-c">
+        <div class="enter-con">
+          <p><%= user.id %> 님의</p>
+          <a href="onepick.html" class="enter-btn">집들이 선물 원픽 확인하러가기</a>
+        </div>
+  
+        <ul class="sns-con flex-r">
+          <li><a class="twitter-btn" href="#"  target="_self" title="트위터 새창열림"><img src="/images/twitter.png" alt="twitter"></a></li>
+          <li><a class="facebook-btn" href="#"  target="_self" title="페이스북 새창열림"><img src="/images/facebook.png" alt="facebook"></a></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+  
+</body>
+</html>

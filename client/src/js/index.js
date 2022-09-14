@@ -1,64 +1,104 @@
 (() => {
-
-  /* Pick Animation */
-  const pickCon1 = document.querySelector('.pick-1-con');
-
-  let pickTiming = { duration: 200, iterations: 1, fill: 'forwards' };
-
-  const pickBox1 = document.querySelector('.pick-1-box');
-  pickBox1.innerHTML = ''
-  + '<span>에어프라이어</span>'
-  + '<span>김치냉장고</span>'
-  + '<span>LG스마트TV</span>'
-  + '<span>삼성비스포크</span>'
-  + '<span>휴지</span>'
-  + '<span>에어프라이어</span>'
-  + '<span>김치냉장고</span>'
-  + '<span>LG스마트TV</span>'
-  + '<span>삼성비스포크</span>'
-  + '<span>휴지</span>'
-  + '<span>에어프라이어</span>'
-  + '<span>김치냉장고</span>'
-  + '<span>LG스마트TV</span>'
-  + '<span>삼성비스포크</span>'
-  + '<span>휴지</span>'
-  + '<span>에어프라이어</span>'
-  + '<span>김치냉장고</span>'
-  + '<span>LG스마트TV</span>'
-  + '<span>삼성비스포크</span>'
-  + '<span>휴지</span>';
-
-  pickCon1.addEventListener('animationend', () => {
-    const pickScale = [ {transform: 'scale(1)'}, {transform: 'scale(1.2)'} ];
-    pickCon1.animate(pickScale, pickTiming);
-  })
-
-  function itemArrow() {
-    const itemListCon = document.querySelector('.item-list-con');
-    const leftArrow = document.querySelector('.arrow-left');
-    const rightArrow = document.querySelector('.arrow-right');
-    let itemList = document.getElementsByClassName('item-list');
-    let index = 0;
-
-    leftArrow.addEventListener('click', () => {
-      if( index == 0 ) {
-        index = itemList.length - 3; // 1
-      } else {
-        index--;
-      } 
-      itemListCon.style.marginLeft = '-' + index * 33.33 + '%';
+  const signInCon = document.querySelector('.sign-in-con');
+  const signUpCon = document.querySelector('.sign-up-con');
+  const signInSelectBtn = document.querySelector('#sign-in-select-btn');
+  const signUpSelectBtn = document.querySelector('#sign-up-select-btn');
+  const signOutBtn = document.querySelector('#sign-out-btn');
+  
+  /* 로그인 전 */
+  if(!signOutBtn) {
+    signUpSelectBtn.addEventListener('click', ()=> {
+      signInCon.classList.add('d-none');
+      signUpCon.classList.remove('d-none');
+      signUpCon.classList.add('flex-c');
     })
-
-    rightArrow.addEventListener('click', () => {
-      if( index == itemList.length - 3 ) {
-        index = 0; 
-      } else {
-        index++;
-      } 
-      itemListCon.style.marginLeft =  '-'+ index * 33.33 + '%';
+    
+    signInSelectBtn.addEventListener('click', ()=> {
+      signUpCon.classList.add('d-none');
+      signInCon.classList.remove('d-none');
+      signInCon.classList.add('flex-c');
+    })
+    
+    const signUpBtn = document.querySelector('#sign-up-btn');
+    signUpBtn.addEventListener('click', (e)=> {
+      SignUp();
+      e.preventDefault();
+    })
+    
+    const signInBtn = document.querySelector('#sign-in-btn');
+    signInBtn.addEventListener('click', (e)=> {
+      SignIn();
+      e.preventDefault();
     })
   }
-  itemArrow();
+  
+  /* 로그인 후 */
+  if(signOutBtn) {
+    signOutBtn.addEventListener('click', ()=> {
+      $.ajax({
+        type: 'get',
+        url: 'http://localhost:3001/logOut',
+        data: {},
+        dataType: 'text',
+        success: function(res) {
+          location.reload();
+        },
+        error: function() {
+          console.log('에러발생');
+        }
+      })
+    })
+  }
+
+
+
+  function SignUp() {
+    
+    const id = document.querySelector('#sign-up-id').value;
+    const pw = document.querySelector('#sign-up-pw').value;
+    const pwc = document.querySelector('#sign-up-pwc').value;
+    //값을 갱신하지 않고 새로 찾아 값 변경
+    document.querySelector('#sign-up-id').value = '';
+    document.querySelector('#sign-up-pw').value = '';
+    document.querySelector('#sign-up-pwc').value = '';
+    
+    /* ajax */
+    $.ajax({
+      type: "post",
+      url: 'http://localhost:3001/login/:signUpId/:signUpPw/:signUpPwc',
+      data: {id:id, pw:pw, pwc: pwc},
+      dataType: 'text',
+      success: function(res) {
+        window.alert(res);
+      },
+      error: function() {
+        window.alert('에러발생');
+      }
+    })
+  }
+
+  function SignIn() {
+    const signInId = document.querySelector('#sign-in-id').value;
+    const signInPw = document.querySelector('#sign-in-pw').value;
+
+    document.querySelector('#sign-in-id').value = '';
+    document.querySelector('#sign-in-pw').value = '';
+
+    $.ajax({
+      type: 'post',
+      url: 'http://localhost:3001/login/:signInId/:signInPw',
+      data: {id: signInId, pw: signInPw},
+      dataType: 'text',
+      success: function(res) {
+        window.alert(res);
+        location.reload();
+      },
+      error: function() {
+        window.alert('에러발생');
+      }
+    })
+  }
+
 })();
 
 
