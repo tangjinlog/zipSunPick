@@ -79,23 +79,23 @@ a {
 
 
 /* Animation */
+
+@keyframes pickConMove {
+  0% {
+    transform : translateY(4vh);
+    opacity: 0;
+  }
+  100% {
+    transform : translateY(0);
+    opacity: 1;
+  }
+}
 @keyframes pickAni {
   0% {
     top: -1400%;
   }
   100% {
     top: 0%;
-  }
-}
-
-@keyframes pickConMove {
-  0% {
-    translateY :4vh;
-    opacity: 0;
-  }
-  100% {
-    translateY:0;
-    opacity: 1;
   }
 }
 
