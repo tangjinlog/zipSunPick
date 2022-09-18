@@ -78,28 +78,17 @@ a {
 .mb-3 { margin-bottom: var(--clr-mb-middle) };
 
 
-/* Animation */
 
-@keyframes pickConMove {
-  0% {
-    transform : translateY(4vh);
-    opacity: 0;
-  }
-  100% {
-    transform : translateY(0);
-    opacity: 1;
-  }
-}
+.mb5 { color: red;}
+
 @keyframes pickAni {
-  0% {
+  from {
     top: -1400%;
   }
-  100% {
+  to {
     top: 0%;
   }
 }
-
-
 
 /*--------------------*/
 /*      component     */
@@ -288,12 +277,12 @@ nav {
 .pick-1-box {
   position: absolute;
   width: 100%;
-  top: -400%;
+  /* top: -400%; */
   left: 0;
   line-height: 1.7;
   font-size: 6vh;
   white-space: nowrap;
-  animation: pickAni 5s 1 forwards cubic-bezier(0.18, 0.64, 0.64, 1.03);
+  animation: pickAni 5s 1 forwards cubic-bezier(0.18, 0.64, 0.64, 1.03); 
 }
 
 .pick-2-con,
@@ -305,13 +294,13 @@ nav {
   /* outline: 2px solid limegreen; */
 }
 
-.pick-2-con {
+/* .pick-2-con {
   animation: pickConMove 0.8s ease-in-out 5.7s 1 forwards;
 }
 
 .pick-3-con {
   animation: pickConMove 0.8s ease-in-out 5.9s 1 forwards;
-}
+} */
 
 /* recommend-list */
 .rec-section {
