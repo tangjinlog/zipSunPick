@@ -1,5 +1,4 @@
 import message from './message/index.js';
-import reply from './message/reply.js';
 
 /* chat-log padding bottom */
 const chatWrap = document.querySelector('.chat-wrap');
@@ -8,4 +7,3 @@ const formBottomPadding = document.querySelector('.chat-form').getBoundingClient
 chatWrap.style.paddingBottom = `${formBottomPadding}px`;
 
 message();         
-reply();

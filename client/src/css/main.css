@@ -57,6 +57,10 @@ a {
   display: grid;
 }
 
+.d-none {
+  display: none;
+}
+
 /* font */
 .uppercase { text-transform: uppercase; }
 
@@ -71,31 +75,20 @@ a {
 
 /* margin */
 .mb-1 { margin-bottom: var(--clr-mb-nomal)};
-.mb-3 { margin-bottom: 3em }
+.mb-3 { margin-bottom: var(--clr-mb-middle) };
 
 
-/* Animation */
+
+.mb5 { color: red;}
+
 @keyframes pickAni {
-  0% {
+  from {
     top: -1400%;
   }
-  100% {
+  to {
     top: 0%;
   }
 }
-
-@keyframes pickConMove {
-  0% {
-    transform: translateY(4vh);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-
 
 /*--------------------*/
 /*      component     */
@@ -139,6 +132,7 @@ nav {
 .profile-con {
   width: 100%;
   height: 100%;
+  gap: 3vh;
   /* outline: 2px solid limegreen; */
 }
 
@@ -169,9 +163,72 @@ nav {
 }
 
 .btn-section {
+  gap: 1rem;
   width: 100%;
-  height: 50vh;
+  height: 60vh;
   background:rgb(220, 197, 188);
+}
+
+/* 로그인 폼 */
+.sign-in-con,
+.sign-up-con {
+  width: 70%;
+  gap: 1rem;
+}
+
+.sign-in-form-con,
+.sign-up-form-con,
+.bar-con,
+.sign-in-select-con,
+.sign-up-select-con {
+  width: 100%;
+}
+
+.sign-in-form,
+.sign-up-form {
+  gap: 0.25rem;
+}
+
+#sign-in-id,
+#sign-in-pw,
+#sign-up-id,
+#sign-up-pw,
+#sign-up-pwc,
+#sign-up-select-btn, 
+#sign-in-select-btn {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1em 1em;
+  border-radius: 5px;
+  border: none;
+} 
+
+#sign-in-btn,
+#sign-up-btn {
+  width: 100%;
+  padding: 1em 1em;
+  border-radius: 5px;
+}
+#sign-in-select-btn,
+#sign-in-btn {
+  background: rgba(129, 91, 3, 0.81);
+}
+
+#sign-up-select-btn,
+#sign-up-btn {
+  background: dodgerblue;
+}
+
+.bar-con {
+  gap: 0.25rem;
+}
+
+.bar-before,
+.bar-after {
+  display: inline-block;
+  width: 50%;
+  height: 0.5px;
+  background: black;
 }
 
 .btn-con {
@@ -206,7 +263,7 @@ nav {
   border-radius: 50%;
 }
 
-/* onepick page */
+/* onepick page */     
 .pick-1-con {
   position: relative;
   width: 35vh;
@@ -220,12 +277,12 @@ nav {
 .pick-1-box {
   position: absolute;
   width: 100%;
-  top: -400%;
+  /* top: -400%; */
   left: 0;
   line-height: 1.7;
   font-size: 6vh;
   white-space: nowrap;
-  animation: pickAni 5s 1 forwards cubic-bezier(0.18, 0.64, 0.64, 1.03);
+  animation: pickAni 5s 1 forwards cubic-bezier(0.18, 0.64, 0.64, 1.03); 
 }
 
 .pick-2-con,
@@ -237,13 +294,13 @@ nav {
   /* outline: 2px solid limegreen; */
 }
 
-.pick-2-con {
+/* .pick-2-con {
   animation: pickConMove 0.8s ease-in-out 5.7s 1 forwards;
 }
 
 .pick-3-con {
   animation: pickConMove 0.8s ease-in-out 5.9s 1 forwards;
-}
+} */
 
 /* recommend-list */
 .rec-section {

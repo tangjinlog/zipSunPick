@@ -1,13 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/default.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/default.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-  <script src="/js/index.js" defer></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="js/index.js" defer></script>
   <!-- <script src="localhost:3001/js[index.js]" defer></script> -->
   <script src="/js/sns-share.js" defer></script>
   <title>집선픽</title>
@@ -35,17 +37,57 @@
       </div>
     </section>
 
-    <section class="btn-section">
-      <div class="btn-con flex-c">
-        <div class="enter-con">
-          <a href="onepick.html" class="enter-btn">집들이 선물 원픽 확인하러가기</a>
+    <section class="btn-section flex-c">
+      <!-- 로그인 전 -->
+      <div class="sign-in-con flex-c">
+        <div class="sign-in-form-con">
+          <form class="sign-in-form flex-c">
+            <label for="user-id">집주인 원픽 확인하러가기</label>
+            <input id="sign-in-id" type="text" name="sign-in-id" placeholder="아이디">
+            <input id="sign-in-pw" type="password" name="sign-in-pw" placeholder="비밀번호">
+            <button id="sign-in-btn">로그인</button>
+          </form>
         </div>
   
+        <div class="bar-con flex-r">
+          <span class="bar-before"></span>
+          <span class="bar-text">OR</span>
+          <span class="bar-after"></span>
+        </div>
+        <!-- 회원가입 버튼 -->
+        <div class="sign-up-select-con">
+          <button id="sign-up-select-btn">회원가입</button>
+        </div>
+      </div>
+
+      <!-- 회원가입 form SignUp() 클릭 시-->
+      <div class="sign-up-con d-none">
+        <div class="sign-up-form-con">
+          <form class="sign-up-form flex-c">
+            <label for="sign-up-id">집선픽 간단가입</label>
+            <input id="sign-up-id" type="text" name="id" placeholder="아이디를 입력해주세요.">
+            <input id="sign-up-pw" type="text" name="pw" placeholder="비밀번호를 입력해주세요.">
+            <input id="sign-up-pwc" type="text" name="pwc" placeholder="비밀번호를 다시 입력해주세요.">
+            <button id="sign-up-btn">회원가입</button>
+          </form>
+        </div>
+  
+        <div class="bar-con flex-r">
+          <span class="bar-before"></span>
+          <span class="bar-text">OR</span>
+          <span class="bar-after"></span>
+        </div>
+  
+        <div class="sign-in-select-con">
+          <button id="sign-in-select-btn">로그인</button>
+        </div>
+      </div>
+
+
         <ul class="sns-con flex-r">
           <li><a class="twitter-btn" href="#"  target="_self" title="트위터 새창열림"><img src="/images/twitter.png" alt="twitter"></a></li>
           <li><a class="facebook-btn" href="#"  target="_self" title="페이스북 새창열림"><img src="/images/facebook.png" alt="facebook"></a></li>
         </ul>
-      </div>
     </section>
   </div>
   
